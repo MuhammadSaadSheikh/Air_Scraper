@@ -1,0 +1,38 @@
+const Colors = {
+  text: '#455154',
+  textPrimary: '#212B36',
+  textSecondary: '#637381',
+  textDisabled: '#919EAB',
+  error: '#E94848',
+  errorBG: '#FFDFDF',
+  background: '#F4F6F8',
+  lightSilver: '#d9d9d9',
+  green: '#22C55E',
+
+  yellow: '#FFAB00',
+  yellowBG: '#FFF5DB',
+  purple: '#4F46E5',
+  purpleBG: '#EEF2FF',
+
+  //Figma Colors
+  black: '#000000',
+  border: '#E9ECEE',
+  white: '#FFFFFF',
+  subtitleText: '#787878',
+  primary: '#0C1E5A',
+  primaryLite: '#E4EAFF',
+  secondary: '#990208',
+  secondaryLite: '#FFE6E6',
+  borderColor: '#0D1E59',
+  forgotText: '#535353',
+  highlightColor: '#FA6C12',
+  lightGrey: '#9A9A9A',
+  backgroundColor: '#FAFAFA',
+  blue: '#121847',
+  chart: '#E9E9E9',
+  report: '#E8EDF5',
+  title: '#5E5E5E',
+  unCheck: '#EEEEEE',
+  check: '#c8e5c9',
+};
+export default Colors;
