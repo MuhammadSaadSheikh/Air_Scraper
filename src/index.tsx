@@ -35,10 +35,10 @@ function Navigation() {
           animation: 'simple_push',
           headerShown: false,
         }}
-        initialRouteName={'Splash'}
+        initialRouteName={'AppStack'}
       >
-        <Stack.Screen name="Splash" component={Splash} />
-        <Stack.Screen name="AuthStack" component={AuthStack} />
+        {/* <Stack.Screen name="Splash" component={Splash} /> */}
+        {/* <Stack.Screen name="AuthStack" component={AuthStack} /> */}
         <Stack.Screen name="AppStack" component={AppStack} />
       </Stack.Navigator>
     </NavigationContainer>

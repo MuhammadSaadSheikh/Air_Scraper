@@ -13,7 +13,7 @@ import {
 import React from 'react';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 //theme
-import { Colors, Fonts } from '../themes';
+import { Colors } from '../themes';
 //assets
 import Icons from '../assets/Icons';
 import Images from '../assets/Images';
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: fontScale(16),
     color: Colors.textPrimary,
-    fontFamily: Fonts.semiBold,
+    // fontFamily: Fonts.semiBold,
   },
   rightIcon: {
     height: 32,
@@ -185,12 +185,12 @@ const styles = StyleSheet.create({
   },
   name: {
     lineHeight: 30,
-    fontFamily: Fonts.semiBold,
+    // fontFamily: Fonts.semiBold,
     fontSize: fontScale(20),
     color: Colors.black,
   },
   job: {
-    fontFamily: Fonts.regular,
+    // fontFamily: Fonts.regular,
     fontSize: fontScale(15),
     color: Colors.textDisabled,
   },

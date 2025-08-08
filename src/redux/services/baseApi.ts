@@ -11,7 +11,7 @@ import { RootState } from '../types';
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://fire-inspection-admin.developer-ourbase-camp.com/api/',
+  baseUrl: 'https://sky-scrapper.p.rapidapi.com/api/v1/',
   prepareHeaders: (
     headers: Headers,
     { getState }: Pick<BaseQueryApi, 'getState'>,
@@ -22,6 +22,11 @@ const baseQuery = fetchBaseQuery({
       headers.set('Authorization', `Bearer ${token}`);
     }
     headers.set('Accept', 'application/json');
+    headers.set('X-RapidAPI-Host', 'sky-scrapper.p.rapidapi.com');
+    headers.set(
+      'X-RapidAPI-Key',
+      '666f8331d3msh0a4e5c2924758ccp122978jsn57d3cac28684',
+    );
     return headers;
   },
 });
@@ -36,14 +41,8 @@ const baseQueryWithReauth = async (
   try {
     result = await baseQuery(args, api, extraOptions);
   } catch (error: any) {
-    console.log('--- ~ error:', error);
     if (error.status === 401) {
-      // const isRefreshed = await refreshToken();
-      // if (isRefreshed) {
-      //   result = await baseQuery(args, api, extraOptions);
-      // } else {
       throw error;
-      // }
     } else {
       throw error;
     }

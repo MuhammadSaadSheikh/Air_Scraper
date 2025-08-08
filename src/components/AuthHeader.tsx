@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     fontSize: fontScale(25),
     marginTop: 35,
     textAlign: 'center',
-    fontFamily: Fonts.bold,
+    // fontFamily: Fonts.bold,
     color: Colors.black,
   },
   subtitleStyle: {
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     lineHeight: 22,
     textAlign: 'center',
-    fontFamily: Fonts.regular,
+    // fontFamily: Fonts.regular,
     color: Colors.lightGrey,
     marginBottom: 40,
   },

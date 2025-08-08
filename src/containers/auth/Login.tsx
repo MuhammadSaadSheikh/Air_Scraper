@@ -41,9 +41,9 @@ const Login = () => {
   const [email, setEmail] = useState('testinspector@mailinator.com');
   const [password, setPassword] = useState('Abc12345@');
   const [selected, setSelected] = useState(0);
-  const [authLogin, response] = useAuthLoginMutation();
+  // const [authLogin, response] = useAuthLoginMutation();
 
-  loaderActions.setLoader(response?.isLoading);
+  // loaderActions.setLoader(response?.isLoading);
 
   const handleSubmit = () => {
     if (!email || !password) return errorToast('Please filled all the fields');
@@ -55,23 +55,23 @@ const Login = () => {
     for (let key in params) {
       formData.append(key, params[key]);
     }
-    authLogin(formData);
+    // authLogin(formData);
   };
 
-  useEffect(() => {
-    const data = response?.data?.response?.data;
-    if (response?.isSuccess) {
-      successToast(response?.data?.message);
-      userActions.setUserToken(data?.token);
-      userActions.setUserData(data?.user);
-      NavService.reset(0, [{ name: 'AppStack' }]);
-    } else if (response?.isError) ErrorHandler(response?.error);
-  }, [response]);
+  // useEffect(() => {
+  //   const data = response?.data?.response?.data;
+  //   if (response?.isSuccess) {
+  //     successToast(response?.data?.message);
+  //     userActions.setUserToken(data?.token);
+  //     userActions.setUserData(data?.user);
+  //     NavService.reset(0, [{ name: 'AppStack' }]);
+  //   } else if (response?.isError) ErrorHandler(response?.error);
+  // }, [response]);
 
   return (
     <AuthBackground back={false} help={false}>
       <View style={styles.container}>
-        <Image source={Images.logo} style={styles.logo} />
+        {/* <Image source={Images.logo} style={styles.logo} /> */}
         <Text style={styles.greetingText}>Login Account</Text>
         <View style={styles.welcomeContainer}>
           <Text style={styles.welcomeText}>Please login into your account</Text>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   greetingText: {
     fontSize: 25,
-    fontFamily: Fonts.bold,
+    // fontFamily: Fonts.bold,
     color: Colors.black,
     width: '100%',
     marginTop: 15,
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     fontSize: fontScale(13),
-    fontFamily: Fonts.semiBold,
+    // fontFamily: Fonts.semiBold,
     color: Colors.subtitleText,
   },
   logo: {

@@ -3,7 +3,7 @@ import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colors } from '../themes';
 import Icons from '../assets/Icons';
 import { globalStyles } from '../config/GlobalStyle';
-import CustomImagePicker from './CustomImagePicker';
+// import CustomImagePicker from './CustomImagePicker';
 
 interface ProfileImageProps {
   size?: number;
@@ -37,11 +37,11 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
             ]}
           />
           {isEdit && (
-            <CustomImagePicker onImageChange={e => console.log(e, '------')}>
-              <View style={[styles.editContainer, globalStyles.shadow]}>
-                <Image source={Icons.edit} style={styles.editIcon} />
-              </View>
-            </CustomImagePicker>
+            // <CustomImagePicker onImageChange={e => console.log(e, '------')}>
+            <View style={[styles.editContainer, globalStyles.shadow]}>
+              <Image source={Icons.edit} style={styles.editIcon} />
+            </View>
+            // </CustomImagePicker>
           )}
         </>
       ) : (

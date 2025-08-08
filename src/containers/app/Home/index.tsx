@@ -1,216 +1,118 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Text,
   StyleSheet,
   Dimensions,
   View,
   TouchableOpacity,
+  PermissionsAndroid,
+  Platform,
+  Image,
+  FlatList,
 } from 'react-native';
-import { BarChart } from 'react-native-gifted-charts';
 
 //theme
-import { Colors, Fonts } from '../../../themes';
+import { Colors } from '../../../themes';
 //components
-import { AppBackground } from '../../../components';
+import AppBackground from '../../../components/AppBackground';
+import CustomButton from '../../../components/CustomButton';
+import AutoCompleteInput from '../../../components/AutoCompleteInput';
 //config
 import { fontScale } from '../../../config/FontDimension';
 import { globalStyles } from '../../../config/GlobalStyle';
 //utils
-import { Shadows } from '../../../utils';
+import {
+  useLazyGetAirportsByLocationQuery,
+  useLazyGetNearbyAirportsQuery,
+} from '../../../redux/services/userApis';
+import ListEmptyComponent from '../../../components/ListEmptyComponent';
+import CustomModal from '../../../components/CustomModal';
 
 const { width } = Dimensions.get('screen');
 
 const Home = () => {
-  const [selected, setSelected] = React.useState('Monthly');
-  const data = [
-    { count: '16', color: '#E9E9E9', title: 'Complete This Month' },
-    { count: '05', color: '#D8E1FF', title: 'In Progress' },
-    { count: '03', color: '#FFBFC2', title: 'Pending This Month' },
-    { count: '254', color: '#E8FFC7', title: 'Total Complete Inspections' },
-  ];
-  const renderCard = (val: any, ind = 0) => {
+  // const inputRef = useRef(null);
+  // const inputRefSec = useRef(null);
+  const [address, setAddress] = useState();
+  console.log('🚀 ~ Home ~ address:', address);
+
+  const [getNearbyAirports, response] = useLazyGetNearbyAirportsQuery();
+  // const [getAirportsByLocation, response] = useLazyGetAirportsByLocationQuery();
+  // console.log('🚀 ~ Home ~ locationResponse:', response);
+  // console.log('🚀 ~ Home ~ response:', response);
+
+  // const [fromLocation, setFromLocation] = useState<string>('');
+  // const [whereLocation, setWhereLocation] = useState<string>('');
+  const [airportList, setAirportList] = useState([]);
+  // console.log('🚀 ~ Home ~ airportList:', airportList);
+
+  useEffect(() => {
+    setAirportList(response?.data?.data?.nearby);
+  }, [response]);
+
+  const renderCard = ({ item, index }: { item: object; index: number }) => {
     return (
-      <View
-        key={ind}
-        style={[styles.cardContainer, { backgroundColor: val?.color }]}
-      >
-        <Text style={styles.countStyle}>{val?.count}</Text>
-        <Text style={styles.title}>{val?.title}</Text>
+      <View key={index} style={[styles.container]}>
+        <Text style={styles.title}>{item?.presentation?.suggestionTitle}</Text>
+        <Text style={styles.subTitle}>
+          {item?.navigation?.localizedName}, {item?.navigation?.entityType}
+        </Text>
       </View>
     );
   };
-
-  const list = ['Monthly', 'Quarterly', 'Yearly'];
-
-  const barData = [
-    {
-      value: 10,
-      label: 'Mon',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: styles.labelStyle,
-      frontColor: Colors.secondary,
-      yAxisLabelTextStyle: styles.labelStyle,
-    },
-    { value: 40, frontColor: Colors.primary },
-    {
-      value: 50,
-      label: 'Tue',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: styles.labelStyle,
-      frontColor: Colors.secondary,
-    },
-    { value: 40, frontColor: Colors.primary },
-    {
-      value: 75,
-      label: 'Wed',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: styles.labelStyle,
-      frontColor: Colors.secondary,
-    },
-    { value: 25, frontColor: Colors.primary },
-    {
-      value: 30,
-      label: 'Thu',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: styles.labelStyle,
-      frontColor: Colors.secondary,
-    },
-    { value: 20, frontColor: Colors.primary },
-    {
-      value: 60,
-      label: 'Fri',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: styles.labelStyle,
-      frontColor: Colors.secondary,
-    },
-    { value: 40, frontColor: Colors.primary },
-    {
-      value: 65,
-      label: 'Sat',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: styles.labelStyle,
-      frontColor: Colors.secondary,
-    },
-    { value: 30, frontColor: Colors.primary },
-    {
-      value: 65,
-      label: 'Sun',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: styles.labelStyle,
-      frontColor: Colors.secondary,
-    },
-    { value: 30, frontColor: Colors.primary },
-  ];
-
-  const renderCart = () => {
-    return (
-      <BarChart
-        noOfSections={5}
-        width={width * 0.75}
-        barBorderRadius={4}
-        // yAxisLabelTexts={['0', '10', '15', '20', '25', '30', '35']}
-        yAxisTextStyle={styles.labelStyle}
-        showFractionalValues
-        showYAxisIndices
-        // hideRules
-        data={barData}
-      />
-    );
+  const handleSearch = () => {
+    getNearbyAirports({ lat: '24.8607', lng: '67.0011' });
   };
+
+  // const handleSearchLocation = () => {
+  //   // getAirportsByLocation('Pakistan');
+  //   getAirportsByLocation({ lat: '24.8607', lng: '67.0011' });
+  // };
 
   return (
-    <AppBackground homeHeader containerStyle={{ paddingBottom: 0 }}>
-      <Text style={styles.heading}>Your Statistics</Text>
-      <View style={globalStyles.rowContainer}>
-        {list?.map((val, ind) => (
-          <TouchableOpacity
-            key={ind}
-            style={[
-              styles.dropDownContainer,
-              {
-                backgroundColor:
-                  selected === val ? Colors.primary : Colors.white,
-              },
-            ]}
-            onPress={() => setSelected(val)}
-          >
-            <Text
+    <AppBackground
+      homeHeader
+      containerStyle={{ paddingBottom: 0, paddingHorizontal: 15 }}
+      disableScroll
+    >
+      <Text>asd</Text>
+      <FlatList
+        ListHeaderComponent={
+          <>
+            <View
               style={[
-                globalStyles.textCenter,
-                {
-                  fontSize: fontScale(12),
-                  color: selected === val ? Colors.white : Colors.black,
-                },
+                globalStyles.rowContainer,
+                { marginBottom: 0, backgroundColor: 'red' },
               ]}
             >
-              {val}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={styles.chartContainer}>
-        <Text style={styles.monthly}>{selected} Inspection</Text>
-        {renderCart()}
-      </View>
-      <View style={styles.wrapContainer}>{data.map(renderCard)}</View>
+              <AutoCompleteInput
+                currentAddress={address}
+                placeholder={'Your Address'}
+                setAddressDetail={detalis => {
+                  setAddress(detalis?.formatted_address);
+                }}
+              />
+              <CustomButton title="Search" onPress={handleSearch} />
+            </View>
+          </>
+        }
+        data={airportList}
+        renderItem={renderCard}
+        ListEmptyComponent={<ListEmptyComponent />}
+      />
     </AppBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  heading: {
-    fontSize: fontScale(20),
-    color: Colors.black,
-    fontFamily: Fonts.bold,
-    lineHeight: 36,
-  },
+  // heading: {
+  //   fontSize: fontScale(20),
+  //   color: Colors.black,
+  //   fontFamily: Fonts.bold,
+  //   lineHeight: 36,
+  // },
   wrapContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  cardContainer: {
-    width: '48%',
-    backgroundColor: Colors.white,
-    height: 140,
-    borderRadius: 15,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    paddingHorizontal: 15,
-    marginBottom: 15,
-  },
-  countStyle: {
-    fontSize: fontScale(35),
-    color: Colors.blue,
-    fontFamily: Fonts.bold,
-    lineHeight: 36,
-    // marginTop: 40,
-    marginBottom: 10,
-  },
-  title: {
-    fontSize: fontScale(13),
-    color: Colors.blue,
-    fontFamily: Fonts.bold,
-  },
-  monthly: {
-    fontFamily: Fonts.extraBold,
-    fontSize: fontScale(15),
-    lineHeight: 24,
-    paddingHorizontal: 20,
-    marginBottom: 20,
-    color: Colors.primary,
-  },
-  labelStyle: {
-    color: Colors.black,
-    fontSize: 12,
-    fontFamily: Fonts.bold,
+    flex: 1,
   },
   dropDownContainer: {
     width: '32%',
@@ -218,14 +120,35 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 10,
   },
-  chartContainer: {
-    width: '100%',
-    paddingVertical: 20,
-    // paddingHorizontal: 10,
-    backgroundColor: '#E9E9E9',
-    borderRadius: 10,
-    marginVertical: 20,
-    ...Shadows.shadow3,
+  //
+  container: {
+    backgroundColor: Colors.white,
+    borderRadius: 15,
+    marginBottom: 15,
+    borderWidth: 1,
+    padding: 20,
+    borderColor: Colors.border,
+  },
+  title: {
+    fontSize: fontScale(14),
+    color: Colors.black,
+    fontWeight: 'bold',
+  },
+  subTitle: {
+    fontSize: fontScale(10),
+    color: Colors.black,
+    // fontWeight: 'bold',
+  },
+  iconStyle: {
+    width: 25,
+    height: 25,
+    marginRight: 5,
+  },
+  locationImg: {
+    width: 110,
+    height: 110,
+    borderTopLeftRadius: 15,
+    borderBottomLeftRadius: 15,
   },
 });
 

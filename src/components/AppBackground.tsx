@@ -18,12 +18,6 @@ interface AppBackgroundProps {
   back?: boolean;
   showHeader?: boolean;
   homeHeader?: boolean;
-  // deleteIcon?: boolean;
-  // editIcon?: boolean;
-  // crossIcon?: boolean;
-  // onDeletePress?: () => void;
-  // onEditPress?: () => void;
-  // onCrossPress?: () => void;
   notificationIcon?: boolean;
   disableScroll?: boolean;
   hideUIOnLoader?: boolean;

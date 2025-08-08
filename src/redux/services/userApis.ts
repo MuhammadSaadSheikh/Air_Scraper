@@ -1,50 +1,32 @@
-import { UserType } from '../types';
 import { baseApi } from './baseApi';
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getUsers: builder.query<UserType[], void>({
-      query: () => 'users',
-      providesTags: [],
-    }),
-
-    getUserById: builder.query<UserType, number>({
-      query: id => `users/${id}`,
-      providesTags: [],
-    }),
-
-    addUser: builder.mutation<UserType, Partial<UserType>>({
-      query: newUser => ({
-        url: 'users',
-        method: 'POST',
-        body: newUser,
+    getNearbyAirports: builder.query({
+      query: params => ({
+        url: 'flights/getNearByAirports',
+        method: 'GET',
+        params,
       }),
-      invalidatesTags: [],
     }),
-
-    updateUser: builder.mutation<UserType, { id: number; userData: UserType }>({
-      query: ({ id, userData }) => ({
-        url: `users/${id}`,
-        method: 'PUT',
-        body: userData,
+    getAirportsByLocation: builder.query({
+      query: ({ lat, lng }) => ({
+        url: 'flights/searchAirport',
+        method: 'GET',
+        params: { lat, lng },
       }),
-      invalidatesTags: [],
     }),
-
-    deleteUser: builder.mutation<void, number>({
-      query: id => ({
-        url: `users/${id}`,
-        method: 'DELETE',
-      }),
-      invalidatesTags: [],
-    }),
+    // getAirportsByLocation: builder.query({
+    //   query: ({ lat, lng }) => ({
+    //     url: 'flights/searchAirport',
+    //     method: 'GET',
+    //     params: { lat, lng },
+    //   }),
+    // }),
   }),
 });
 
 export const {
-  useGetUsersQuery,
-  useGetUserByIdQuery,
-  useAddUserMutation,
-  useUpdateUserMutation,
-  useDeleteUserMutation,
+  useLazyGetNearbyAirportsQuery,
+  useLazyGetAirportsByLocationQuery,
 } = userApi;
