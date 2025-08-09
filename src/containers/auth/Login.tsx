@@ -11,9 +11,8 @@ import React, { useEffect, useState } from 'react';
 import { Colors } from '../../themes';
 //assets
 import Icons from '../../assets/Icons';
-import Images from '../../assets/Images';
 //utils
-import { NavService, ErrorHandler } from '../../utils';
+import { NavService } from '../../utils';
 //components
 import AuthBackground from '../../components/AuthBackground';
 import CustomButton from '../../components/CustomButton';
@@ -22,44 +21,33 @@ import CustomTextInput from '../../components/Form/CustomTextInput';
 import { fontScale } from '../../config/FontDimension';
 import DimensionsUtil from '../../config/ImageDimension';
 import {
+  arePasswordsMatching,
   errorToast,
-  isValidEmail,
-  isValidPassword,
-  successToast,
 } from '../../redux/services/validations';
-import { useAuthLoginMutation } from '../../redux/services/authApi';
 import { loaderActions, userActions } from '../../redux/actions';
 
 const Login = () => {
-  const [email, setEmail] = useState('testinspector@mailinator.com');
-  const [password, setPassword] = useState('Abc12345@');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [selected, setSelected] = useState(0);
-  // const [authLogin, response] = useAuthLoginMutation();
 
   // loaderActions.setLoader(response?.isLoading);
 
   const handleSubmit = () => {
-    if (!email || !password) return errorToast('Please filled all the fields');
-    if (!isValidEmail(email)) return;
-    if (!isValidPassword(password)) return;
+    if (!firstName || !lastName || !email || !password)
+      return errorToast('Please filled all the fields');
+    else if (!arePasswordsMatching(password, confirmPassword)) return;
 
-    const formData = new FormData();
-    let params: { [key: string]: string } = { password, email };
-    for (let key in params) {
-      formData.append(key, params[key]);
-    }
-    // authLogin(formData);
+    // const formData = new FormData();
+    // let params: { [key: string]: string } = { password, email };
+    // for (let key in params) {
+    //   formData.append(key, params[key]);
+    // }
+    NavService.reset(0, [{ name: 'AppStack' }]);
   };
-
-  // useEffect(() => {
-  //   const data = response?.data?.response?.data;
-  //   if (response?.isSuccess) {
-  //     successToast(response?.data?.message);
-  //     userActions.setUserToken(data?.token);
-  //     userActions.setUserData(data?.user);
-  //     NavService.reset(0, [{ name: 'AppStack' }]);
-  //   } else if (response?.isError) ErrorHandler(response?.error);
-  // }, [response]);
 
   return (
     <AuthBackground back={false} help={false}>
@@ -71,10 +59,9 @@ const Login = () => {
         </View>
 
         <CustomTextInput
-          placeholder="Enter Email Address"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
+          placeholder="Enter first Name"
+          value={firstName}
+          onChangeText={setFirstName}
           leftIcon={Icons.mail}
           onFocus={() => setSelected(1)}
           onBlur={() => setSelected(0)}
@@ -86,11 +73,10 @@ const Login = () => {
           }}
         />
         <CustomTextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          type="password"
-          leftIcon={Icons.key}
+          placeholder="Enter Last Name"
+          value={lastName}
+          onChangeText={setLastName}
+          leftIcon={Icons.mail}
           onFocus={() => setSelected(2)}
           onBlur={() => setSelected(0)}
           containerStyle={{
@@ -100,15 +86,53 @@ const Login = () => {
             tintColor: selected === 2 ? Colors.secondary : Colors.textDisabled,
           }}
         />
-        <View style={styles.forgotContainer}>
-          <TouchableOpacity
-            onPress={() => NavService.navigate('ForgotPassword')}
-          >
-            <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-          </TouchableOpacity>
-        </View>
+        <CustomTextInput
+          placeholder="Enter Email Address"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          leftIcon={Icons.mail}
+          onFocus={() => setSelected(3)}
+          onBlur={() => setSelected(0)}
+          containerStyle={{
+            borderColor: selected === 3 ? Colors.primary : Colors.border,
+          }}
+          leftIconStyle={{
+            tintColor: selected === 3 ? Colors.secondary : Colors.textDisabled,
+          }}
+        />
+        <CustomTextInput
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          type="password"
+          leftIcon={Icons.key}
+          onFocus={() => setSelected(4)}
+          onBlur={() => setSelected(0)}
+          containerStyle={{
+            borderColor: selected === 4 ? Colors.primary : Colors.border,
+          }}
+          leftIconStyle={{
+            tintColor: selected === 4 ? Colors.secondary : Colors.textDisabled,
+          }}
+        />
+        <CustomTextInput
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          type="password"
+          leftIcon={Icons.key}
+          onFocus={() => setSelected(4)}
+          onBlur={() => setSelected(0)}
+          containerStyle={{
+            borderColor: selected === 4 ? Colors.primary : Colors.border,
+          }}
+          leftIconStyle={{
+            tintColor: selected === 4 ? Colors.secondary : Colors.textDisabled,
+          }}
+        />
 
-        <CustomButton title="Login Account" onPress={handleSubmit} />
+        <CustomButton title="Signup Account" onPress={handleSubmit} />
 
         {/* <CustomButton
           variant="social"

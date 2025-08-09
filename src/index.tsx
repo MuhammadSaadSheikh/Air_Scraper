@@ -20,9 +20,9 @@ function Navigation() {
           animation: 'simple_push',
           headerShown: false,
         }}
-        initialRouteName={'AppStack'}
+        initialRouteName={'AuthStack'}
       >
-        {/* <Stack.Screen name="AuthStack" component={AuthStack} /> */}
+        <Stack.Screen name="AuthStack" component={AuthStack} />
         <Stack.Screen name="AppStack" component={AppStack} />
       </Stack.Navigator>
     </NavigationContainer>
