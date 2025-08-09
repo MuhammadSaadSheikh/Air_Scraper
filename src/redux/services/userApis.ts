@@ -17,10 +17,10 @@ export const userApi = baseApi.injectEndpoints({
       }),
     }),
     // getAirportsByLocation: builder.query({
-    //   query: ({ lat, lng }) => ({
+    //   query: parmas => ({
     //     url: 'flights/searchAirport',
     //     method: 'GET',
-    //     params: { lat, lng },
+    //     params,
     //   }),
     // }),
   }),

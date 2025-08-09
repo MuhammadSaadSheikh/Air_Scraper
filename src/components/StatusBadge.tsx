@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Fonts from 'src/themes/Fonts';
+import { Colors } from '../themes';
 
 export type BadgeType = 'pending' | 'approved' | 'rejected' | 'delayed';
 
@@ -70,6 +70,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 12,
-    fontFamily: Fonts.medium,
+    color: Colors.black
   },
 });

@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   ImageSourcePropType,
 } from 'react-native';
-import { Colors, Fonts } from '../../themes';
+import { Colors } from '../../themes';
 import Icons from '../../assets/Icons';
 import { fontScale } from '../../config/FontDimension';
 import DimensionsUtil from '../../config/ImageDimension';
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 55,
     color: Colors.text,
-    fontFamily: Fonts.regular,
+    // fontFamily: Fonts.regular,
     fontSize: fontScale(13),
   },
   passwordToggle: {
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: Colors.error,
     marginTop: 5,
-    fontFamily: Fonts.regular,
+    // fontFamily: Fonts.regular,
     fontSize: 12,
     width: '100%',
   },

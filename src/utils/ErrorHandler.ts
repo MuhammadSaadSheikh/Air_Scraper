@@ -3,14 +3,6 @@ import { errorToast } from '../redux/services/validations';
 import NavService from './NavService';
 
 const ErrorHandler = (e: any, showError = true, defaultError = true) => {
-  // if (e.response?.status === 401) {
-  //   errorToast('Session Expired. Please Login Again');
-  //   // logoutUser();
-  //   NavService.reset(0, [{ name: 'AuthStack' }]);
-  //   return;
-  // } else {
-  // const error = e?.response?.data?.errors;
-  // const error2 = e?.response?.data?.message;
   const error = e?.data?.errors;
   const error2 = e?.data?.message;
 

@@ -1,4 +1,4 @@
-import { BadgeType } from 'src/components/StatusBadge';
+import { BadgeType } from '../components/StatusBadge';
 
 const transformStatus = (status: string) => {
   switch (status) {

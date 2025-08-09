@@ -6,25 +6,18 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-// import {
-//   signInWithOTP,
-//   getCurrentUser,
-//   signInWithGoogle,
-// } from 'src/redux/services/firebase';
 import React, { useEffect, useState } from 'react';
 //theme
-import { Colors, Fonts } from '../../themes';
+import { Colors } from '../../themes';
 //assets
 import Icons from '../../assets/Icons';
 import Images from '../../assets/Images';
 //utils
 import { NavService, ErrorHandler } from '../../utils';
 //components
-import {
-  AuthBackground,
-  CustomTextInput,
-  CustomButton,
-} from '../../components';
+import AuthBackground from '../../components/AuthBackground';
+import CustomButton from '../../components/CustomButton';
+import CustomTextInput from '../../components/Form/CustomTextInput';
 //config
 import { fontScale } from '../../config/FontDimension';
 import DimensionsUtil from '../../config/ImageDimension';

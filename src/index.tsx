@@ -4,27 +4,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { NavService } from './utils';
 import { AppStack, AuthStack } from './containers';
-import Splash from './containers/auth/Splash';
-// import { getCurrentUser } from './redux/services/firebase';
 
 const Stack = createNativeStackNavigator();
 
 function Navigation() {
   // const [initialRoute, setInitialRoute] = React.useState('AuthStack');
   // const [loading, setLoading] = React.useState(true);
-
-  // const getUser = () => {
-  //   // const user = getCurrentUser();
-  //   // if (user) setInitialRoute('AppStack');
-  //   // else setInitialRoute('AuthStack');
-  //   setLoading(false);
-  //   // setTimeout(SplashScreen.hide, 2000);
-  // };
-
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
-
   // if (loading) return null;
 
   return (
@@ -37,7 +22,6 @@ function Navigation() {
         }}
         initialRouteName={'AppStack'}
       >
-        {/* <Stack.Screen name="Splash" component={Splash} /> */}
         {/* <Stack.Screen name="AuthStack" component={AuthStack} /> */}
         <Stack.Screen name="AppStack" component={AppStack} />
       </Stack.Navigator>

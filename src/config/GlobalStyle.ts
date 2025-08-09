@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 //config
 import { fontScale } from './FontDimension';
 //theme
-import { Colors, Fonts } from '../themes';
+import { Colors } from '../themes';
 
 export const globalStyles = StyleSheet.create({
   container: {
@@ -17,7 +17,7 @@ export const globalStyles = StyleSheet.create({
   authText: {
     marginTop: 25,
     fontSize: fontScale(14),
-    fontFamily: Fonts.semiBold,
+    // fontFamily: Fonts.semiBold,
     color: Colors.lightGrey,
     textAlign: 'center',
   },
@@ -53,6 +53,6 @@ export const globalStyles = StyleSheet.create({
     color: Colors.black,
     textAlign: 'center',
     flex: 1,
-    fontFamily: Fonts.bold,
+    // fontFamily: Fonts.bold,
   },
 });

@@ -13,8 +13,8 @@ import {
   TouchableOpacity,
   ImageSourcePropType,
 } from 'react-native';
-import Icons from 'src/assets/Icons';
-import { Colors, Fonts } from 'src/themes';
+import { Colors } from '../../themes';
+import Icons from '../../assets/Icons';
 
 const { width } = Dimensions.get('window');
 
@@ -88,9 +88,9 @@ const CustomDropDown = <T extends unknown>({
             ]}>
             {value ? getDisplayValue(value) : placeholder}
           </Text>
-          {rightIcon && (
+          {/* {rightIcon && (
             <Image source={Icons.chevronDown} style={styles.rightIcon} />
-          )}
+          )} */}
         </TouchableOpacity>
 
         {isFocused && (
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 14,
-    fontFamily: Fonts.regular,
+    // fontFamily: Fonts.regular,
     color: Colors.textPrimary,
   },
   rightIcon: {
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 14,
-    fontFamily: Fonts.regular,
+    // fontFamily: Fonts.regular,
     color: Colors.textPrimary,
   },
   noData: {
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: Colors.error,
     marginTop: 5,
-    fontFamily: Fonts.regular,
+    // fontFamily: Fonts.regular,
     fontSize: 12,
     width: '100%',
   },

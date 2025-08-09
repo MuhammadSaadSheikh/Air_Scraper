@@ -1,5 +1,4 @@
 export const expenseTags = {
-  // EXPENSES: 'EXPENSES',
   USER: 'USER',
 };
 

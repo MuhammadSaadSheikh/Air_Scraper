@@ -1,7 +1,7 @@
 import React from 'react';
-import { Shadows } from 'src/utils';
-import { Colors, Fonts } from 'src/themes';
+import { Colors } from '../../themes';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { Shadows } from '../../utils';
 
 interface ContainerInputProps {
   onChange: (text: string) => void;
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     color: Colors.text,
-    fontFamily: Fonts.semiBold,
+    // fontFamily: Fonts.semiBold,
   },
   inputWrapper: {
     height: 50,
@@ -74,19 +74,19 @@ const styles = StyleSheet.create({
   currencySymbol: {
     fontSize: 16,
     marginRight: 10,
-    fontFamily: Fonts.regular,
+    // fontFamily: Fonts.regular,
     color: Colors.textDisabled,
   },
   textInput: {
     fontSize: 16,
     color: Colors.text,
     textAlign: 'center',
-    fontFamily: Fonts.regular,
+    // fontFamily: Fonts.regular,
   },
   errorText: {
     color: Colors.error,
     marginTop: 5,
-    fontFamily: Fonts.regular,
+    // fontFamily: Fonts.regular,
     fontSize: 12,
     width: '100%',
   },
