@@ -31,20 +31,12 @@ import CustomModal from '../../../components/CustomModal';
 const { width } = Dimensions.get('screen');
 
 const Home = () => {
-  // const inputRef = useRef(null);
-  // const inputRefSec = useRef(null);
   const [address, setAddress] = useState();
-  console.log('🚀 ~ Home ~ address:', address);
 
-  const [getNearbyAirports, response] = useLazyGetNearbyAirportsQuery();
-  // const [getAirportsByLocation, response] = useLazyGetAirportsByLocationQuery();
-  // console.log('🚀 ~ Home ~ locationResponse:', response);
-  // console.log('🚀 ~ Home ~ response:', response);
+  // const [getNearbyAirports, response] = useLazyGetNearbyAirportsQuery();
+  const [getAirportsByLocation, response] = useLazyGetAirportsByLocationQuery();
 
-  // const [fromLocation, setFromLocation] = useState<string>('');
-  // const [whereLocation, setWhereLocation] = useState<string>('');
   const [airportList, setAirportList] = useState([]);
-  // console.log('🚀 ~ Home ~ airportList:', airportList);
 
   useEffect(() => {
     setAirportList(response?.data?.data?.nearby);
@@ -64,37 +56,31 @@ const Home = () => {
     getNearbyAirports({ lat: '24.8607', lng: '67.0011' });
   };
 
-  // const handleSearchLocation = () => {
-  //   // getAirportsByLocation('Pakistan');
-  //   getAirportsByLocation({ lat: '24.8607', lng: '67.0011' });
-  // };
-
   return (
     <AppBackground
       homeHeader
       containerStyle={{ paddingBottom: 0, paddingHorizontal: 15 }}
       disableScroll
     >
-      <Text>asd</Text>
       <FlatList
         ListHeaderComponent={
-          <>
-            <View
-              style={[
-                globalStyles.rowContainer,
-                { marginBottom: 0, backgroundColor: 'red' },
-              ]}
-            >
-              <AutoCompleteInput
-                currentAddress={address}
-                placeholder={'Your Address'}
-                setAddressDetail={detalis => {
-                  setAddress(detalis?.formatted_address);
-                }}
-              />
-              <CustomButton title="Search" onPress={handleSearch} />
-            </View>
-          </>
+          //   <>
+          //     <View
+          //       style={[
+          //         globalStyles.rowContainer,
+          //         { marginBottom: 0, backgroundColor: 'red' },
+          //       ]}
+          //     >
+          //       <AutoCompleteInput
+          //         currentAddress={address}
+          //         placeholder={'Your Address'}
+          //         setAddressDetail={detalis => {
+          //           setAddress(detalis?.formatted_address);
+          //         }}
+          //       />
+          <CustomButton title="Search" onPress={handleSearch} />
+          //     </View>
+          //   </>
         }
         data={airportList}
         renderItem={renderCard}
