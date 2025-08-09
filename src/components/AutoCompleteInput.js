@@ -42,7 +42,7 @@ const AutoCompleteInput = props => {
           setIsFocused(false);
         }}
         query={{
-          key: 'AIzaSyBmaS0B0qwokES4a_CiFNVkVJGkimXkNsk',
+          key: '',
           language: 'en',
           types: 'address',
           // components: 'country:us',
